@@ -1,0 +1,50 @@
+
+In stateless REST APIs, the session data is typically stored on the client side rather than the server side. Here’s how it works and where the session data is stored:
+
+Client-Side Storage
+Cookies:
+
+Description: Small pieces of data stored in the user's browser.
+Usage: Cookies can store session identifiers or tokens. When a client makes a request, the browser automatically sends the relevant cookies to the server.
+Example: When you log in to a website, the server might set a cookie with a session token. Subsequent requests from your browser include this cookie, allowing the server to identify you.
+Local Storage:
+
+Description: A storage mechanism provided by web browsers for storing data persistently on the client side.
+Usage: Local storage can store larger amounts of data compared to cookies, and it is not automatically sent with every HTTP request.
+Example: A web application might store a user’s preferences or a session token in local storage.
+Session Storage:
+
+Description: Similar to local storage but only persists for the duration of the page session. It is cleared when the page session ends (e.g., the tab is closed).
+Usage: Suitable for storing temporary data needed for the current session.
+Example: An application might store form data in session storage so that it is available while the user is filling out the form.
+How It Works in Practice
+Example: User Authentication
+User Logs In:
+
+Client Request: The user submits a login form with their credentials.
+Server Response: The server validates the credentials and responds with a session token (e.g., a JWT - JSON Web Token).
+Token Storage:
+
+Client Action: The client (browser or app) stores the session token in a cookie, local storage, or session storage.
+Subsequent Requests:
+
+Client Request: For each subsequent request, the client includes the session token in the request headers or as a parameter.
+If stored in a cookie, the browser automatically includes the cookie with each request to the server.
+If stored in local or session storage, the client explicitly includes the token in the request headers (e.g., an Authorization header).
+Server Processing: The server receives the token, validates it, and processes the request accordingly.
+Real-Time Example: Online Banking
+Login:
+
+Request: POST /login with credentials in the request body.
+Response: { "token": "abcd1234" }.
+Token Storage:
+
+The client stores abcd1234 in local storage.
+View Account Details:
+
+Request: GET /account with the token in the headers: Authorization: Bearer abcd1234.
+Response: Account details from the server.
+Summary
+In stateless REST APIs, session data (like authentication tokens) is stored on the client side using cookies, local storage, or session storage. 
+  Each request from the client includes the necessary information (e.g., the session token) for the server to understand and process the request independently. 
+  This approach allows the server to remain stateless and not store any client session data between requests.
